@@ -1,0 +1,4 @@
+/out
+/tests/*.result
+/.idea
+/*.iml
