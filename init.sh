@@ -17,6 +17,7 @@ function init_project {
   case $PROJECT_TYPE in
     java)
       cp -R "$SCRIPTDIR/java" "$DIR" || abort
+      cp "$SCRIPTDIR/java.gitignore" "$DIR/.gitignore" || abort
       ;;
     *)
       abort "Error: Unknown project type: $PROJECT_TYPE";;
