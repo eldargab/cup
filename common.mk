@@ -29,4 +29,3 @@ clean:
 	@rm -f tests/*.result
 
 .PHONY: clean test time grade
-.PHONY: $(patsubst tests/%.a, test% time% grade% run%, $(wildcard tests/*.a))

@@ -44,7 +44,7 @@ if [ -n "$TESTS" ]; then
   if [ -e "$TESTS/Check.java" ]; then
     mkdir "$DIR/check" || abort
     cp "$SCRIPTDIR/check/testlib4j.jar" "$TESTS/Check.java" "$DIR/check" || abort
-    cat "$SCRIPTDIR/java.mk" >> "$DIR/Makefile" || abort
+    cat "$SCRIPTDIR/check/java.mk" >> "$DIR/Makefile" || abort
   elif [ -e "$TESTS/check.cpp" ]; then
     mkdir "$DIR/check" || abort
     cp "$SCRIPTDIR/check/testlib.h" "$TESTS/check.cpp" "$DIR/check" || abort
