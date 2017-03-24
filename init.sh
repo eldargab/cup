@@ -29,7 +29,7 @@ if [ -z "$DIR" ] || [ -z "$PROJECT_TYPE" ]
 fi
 
 if [ -e "$DIR" ]; then
-  echo -n "$DIR already exists and will be overwriten. Continue? [y/N] "
+  echo -n "Directory $DIR already exists and will be erased. Continue? [y/N] "
   read ans
   if [ "$ans" != "y" ]
       then exit 1
