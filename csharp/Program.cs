@@ -29,10 +29,50 @@ class Program {
         return p.output.ToString();
     }
 
+    void withBufferedOut(Action a) {
+        if (output != Console.Out) {
+            a();
+            return;
+        }
+        var std = output;
+        std.Flush();
+        output = new StreamWriter(Console.OpenStandardOutput(), Console.OutputEncoding, 8192);
+        try {
+            a();
+        } finally {
+            var o = output;
+            output = std;
+            o.Dispose();
+        }
+    }
+
     #endregion
 }
 
 #region StdLib
+
+static class Exts {
+    public static void Times(this int n, Action a) {
+        for (var i = 0; i < n; i++) {
+            a();
+        }
+    }
+
+    public static void Times(this int n, int start, Action<int> a) {
+        for (var i = start; i < start + n; i++) {
+            a(i);
+        }
+    }
+
+    public static void Times(this int n, Action<int> a) {
+        n.Times(0, a);
+    }
+
+    public static V Get<K, V>(this IDictionary<K, V> d, K k, V def) {
+        V v;
+        return d.TryGetValue(k, out v) ? v : def;
+    }
+}
 
 class Scanner : IEnumerator<string>, IEnumerable<string> {
     private TextReader reader;
