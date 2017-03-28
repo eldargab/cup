@@ -12,6 +12,8 @@ class Program {
         output.WriteLine("Hello world!");
     }
 
+    #region Main
+
     static void Main(string[] args) {
         var p = new Program();
         p.input = args.Length == 0 ? Scanner.ForStdin() : Scanner.ForFile(args[0]);
@@ -26,7 +28,11 @@ class Program {
         p.Run();
         return p.output.ToString();
     }
+
+    #endregion
 }
+
+#region StdLib
 
 class Scanner : IEnumerator<string>, IEnumerable<string> {
     private TextReader reader;
@@ -174,3 +180,5 @@ class Scanner : IEnumerator<string>, IEnumerable<string> {
         return new Scanner(new StreamReader(Console.OpenStandardInput(), Console.InputEncoding));
     }
 }
+
+#endregion
