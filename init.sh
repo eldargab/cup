@@ -13,17 +13,6 @@ DIR=$1
 PROJECT_TYPE=$2
 TESTS=$3
 
-function init_project {
-  case $PROJECT_TYPE in
-    java)
-      cp -R "$SCRIPTDIR/java" "$DIR" || abort
-      cp "$SCRIPTDIR/java.gitignore" "$DIR/.gitignore" || abort
-      ;;
-    *)
-      abort "Error: Unknown project type: $PROJECT_TYPE";;
-  esac
-}
-
 if [ -z "$DIR" ] || [ -z "$PROJECT_TYPE" ]
   then abort "Usage: init <target_dir> <project_type> [test_cases]"
 fi
@@ -37,7 +26,16 @@ if [ -e "$DIR" ]; then
   rm -rf "$DIR"
 fi
 
-init_project
+function init_project {
+  cp -R "$SCRIPTDIR/$1" "$DIR" || abort
+  cp "$SCRIPTDIR/$1.gitignore" "$DIR/.gitignore" || abort
+}
+
+case $PROJECT_TYPE in
+  java) init_project java ;;
+  cs)   init_project csharp ;;
+  *)    abort "Error: Unknown project type: $PROJECT_TYPE" ;;
+esac
 
 if [ -n "$TESTS" ]; then
   cp -R "$TESTS/tests" "$DIR/tests" || abort

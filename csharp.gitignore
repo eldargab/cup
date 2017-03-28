@@ -1,0 +1,6 @@
+/out
+/tests/*.result
+/obj
+/bin
+*.sln
+*.userprefs
