@@ -121,9 +121,8 @@ class Scanner : IEnumerator<string>, IEnumerable<string> {
     }
 
     public void Reset() {
-        throw new NotImplementedException();
+        throw new NotSupportedException();
     }
-
 
     public void Dispose() {
         reader.Dispose();
@@ -178,7 +177,7 @@ class Scanner : IEnumerator<string>, IEnumerable<string> {
         }
 
         public void Reset() {
-            throw new NotImplementedException();
+            throw new NotSupportedException();
         }
     }
 
