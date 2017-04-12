@@ -2,6 +2,7 @@
 /tests/*.result
 /obj
 /bin
+/packages
 *.sln
 *.userprefs
 /.idea
