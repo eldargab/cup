@@ -1,54 +1,37 @@
 import java.io.*;
 import java.util.*;
 import java.util.stream.*;
-import java.nio.charset.Charset;
+
 
 public class Main {
-    private Scanner input;
-    private PrintWriter out;
+    private FastScanner input;
+    private PrintStream out;
 
-    private void run() throws Exception {
+
+    private void run() {
 
     }
+
 
     public static void main(String[] args) throws Exception {
         Main main = new Main();
         main.input = args.length == 0 ? new FastScanner() : new FastScanner(new File(args[0]));
-        try (PrintWriter out = new PrintWriter(
-            System.out,
-            System.getProperty("sun.stdout.encoding", Charset.defaultCharset().name()))
-        ) {
-            main.out = out;
-            main.run();
-        }
+        main.out = System.out;
+        main.run();
     }
+
 
     public static String stringMain(String input) {
         Main main = new Main();
         main.input = new FastScanner(input);
-        StringWriter writer = new StringWriter();
-        try (PrintWriter out = new PrintWriter(writer)) {
+        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+        try (PrintStream out = new PrintStream(buffer)) {
             main.out = out;
             main.run();
         }
-        return writer.toString();
+        return buffer.toString();
     }
 
-    private void withBufferedOut(Runnable action) {
-        PrintWriter downstream = this.out;
-        this.out = new PrintWriter(new BufferedWriter(downstream));
-        try {
-            action.run();
-        } catch (RuntimeException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new RuntimeException(ex);
-        } finally {
-            PrintStream out = this.out;
-            this.out = downstream;
-            out.flush();
-        }
-    }
 
     private static class FastScanner implements Iterator<String>, Iterable<String>, Closeable {
         private Reader reader;
