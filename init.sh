@@ -34,6 +34,7 @@ function init_project {
 case $PROJECT_TYPE in
   java) init_project java ;;
   cs)   init_project csharp ;;
+  rust) init_project rust ;;
   *)    abort "Error: Unknown project type: $PROJECT_TYPE" ;;
 esac
 
