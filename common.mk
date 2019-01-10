@@ -1,31 +1,31 @@
 
-test%: tests/%.a out/run
+
+test%: tests/%.a $(BUILD)
 	@cat tests/$*
 	@echo
 	@echo
-	@cat tests/$* | out/run
+	@cat tests/$* | $(RUN)
 	@echo
 	@cat tests/$*.a
 	@echo
 
 test: test01
 
-run%: tests/%.a out/run
-	@cat tests/$* | out/run > tests/$*.result
+run%: tests/%.a $(BUILD)
+	@cat tests/$* | $(RUN) > tests/$*.result
 
-time%: tests/%.a out/run
+time%: tests/%.a $(BUILD)
 	@echo Test $*
-	@time cat tests/$* | out/run > tests/$*.result
+	@time cat tests/$* | $(RUN) > tests/$*.result
 	@echo
 
-grade%: tests/%.a out/run out/check
-	@cat tests/$* | out/run > tests/$*.result && out/check tests/$* tests/$*.result tests/$*.a
+grade%: tests/%.a $(BUILD) check/check
+	@cat tests/$* | $(RUN) > tests/$*.result && check/check tests/$* tests/$*.result tests/$*.a
 
 time:  $(patsubst tests/%.a, time%, $(wildcard tests/*.a))
 grade: $(patsubst tests/%.a, grade%, $(wildcard tests/*.a))
 
-clean:
-	@rm -rf out
+clean: cleanup
 	@rm -f tests/*.result
 
-.PHONY: clean test time grade
+.PHONY: clean cleanup test time grade

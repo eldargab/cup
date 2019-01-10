@@ -1,3 +1,4 @@
 
-out/check: check/*
-	@g++ -o out/check check/check.cpp
+
+check/check: check/*.cpp check/*.h
+	@cd check; c++ -w -o check check.cpp

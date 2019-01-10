@@ -1,10 +1,9 @@
-/out
 /tests/*.result
+
 /obj
 /bin
-/packages
-*.sln
-*.userprefs
+/.vs
 *.csproj
 *.csproj.user
-/.idea
+*.userprefs
+*.sln

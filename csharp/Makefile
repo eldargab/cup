@@ -1,6 +1,12 @@
-out/run: Makefile Program.cs
-	@mkdir -p out
-	@mcs -langversion:5 -out:out/Program.dll Program.cs
-	@echo "#!/bin/bash" > out/run
-	@echo "mono out/Program.dll \"\$$@\"" >> out/run
-	@chmod +x out/run
+BUILD=bin/Program.dll
+RUN=mono bin/Program.dll
+FILES=$(wildcard *.cs)
+
+
+bin/Program.dll: $(FILES)
+	@mkdir -p bin
+	@mcs -langversion:7 -out:bin/Program.dll $(FILES)
+
+
+cleanup:
+	@rm -rf bin/Program.dll

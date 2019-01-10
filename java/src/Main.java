@@ -4,13 +4,13 @@ import java.util.stream.*;
 
 
 public class Main {
+    private void run() {
+        out.println("Hello world!");
+    }
+
+
     private FastScanner input;
     private PrintStream out;
-
-
-    private void run() {
-
-    }
 
 
     public static void main(String[] args) throws Exception {
@@ -147,6 +147,14 @@ public class Main {
 
         public DoubleStream doubleStream(int size) {
             return stream(size).mapToDouble(Double::parseDouble);
+        }
+
+        public String nextArray(int size) {
+            String[] a = new String[size];
+            for (int i = 0; i < size; i++) {
+                a[i] = next();
+            }
+            return a;
         }
 
         public int[] nextIntArray(int size) {

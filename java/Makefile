@@ -1,7 +1,12 @@
-out/run: Makefile src/*
-	@mkdir -p out/main
-	@javac -d out/main src/*
-	@cd out/main; jar cf ../main.jar *.class
-	@echo "#!/bin/bash" > out/run
-	@echo "java -Xmx256M -Xss64M -cp out/main.jar Main \"\$$@\"" >> out/run
-	@chmod +x out/run
+BUILD=out/program.jar
+RUN=java -Xmx256M -Xss64M -cp out/program.jar Main
+
+
+out/program.jar: src/*
+	@mkdir -p out/classes
+	@javac -d out/classes src/*
+	@cd out/classes; jar cf ../program.jar *.class
+
+
+cleanup:
+	@rm -rf out

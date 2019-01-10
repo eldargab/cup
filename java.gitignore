@@ -1,4 +1,6 @@
-/out
 /tests/*.result
+
+*.class
+/out
 /.idea
 /*.iml
