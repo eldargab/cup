@@ -28,12 +28,16 @@ fi
 
 function init_project {
   cp -R "$SCRIPTDIR/$1" "$DIR" || abort
-  cp "$SCRIPTDIR/$1.gitignore" "$DIR/.gitignore" || abort
+  if [ -z "$SCRIPTDIR/$1.gitignore" ]; then
+    cp "$SCRIPTDIR/$1.gitignore" "$DIR/.gitignore" || abort
+  fi
 }
 
 case $PROJECT_TYPE in
   java) init_project java ;;
   csharp) init_project csharp ;;
+  julia) init_project julia ;;
+  empty) mkdir -p "$DIR";;
   *)    abort "Error: Unknown project type: $PROJECT_TYPE" ;;
 esac
 

@@ -1,0 +1,1 @@
+RUN=julia program.jl
